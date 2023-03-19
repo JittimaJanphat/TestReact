@@ -41,6 +41,7 @@ export default function BlogPage({...other}) {
       <StyledProductImg alt={product.title_en} src={product.poster_url} />
     </Box>
 
+
     <Stack spacing={2} sx={{ p: 3 }}>
       <Typography variant="subtitle2" noWrap>
           {product.title_en}
