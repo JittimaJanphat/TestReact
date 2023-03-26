@@ -13,10 +13,10 @@ export default function ProductList({ products, ...other }) {
   // console.log(products)
   return products && (
     <Grid container spacing={3} {...other}>
-      {products.map((product) => (
+      {products.map((product,index) => (
         <Grid key={product.id} item xs={12} sm={6} md={3}>
 
-          <ShopProductCard product={product} />
+          <ShopProductCard product={product} index={index} />
         </Grid>
       ))}
     </Grid>

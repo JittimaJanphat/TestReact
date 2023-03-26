@@ -3,11 +3,14 @@ import PropTypes from 'prop-types';
 import { Box, Card, Link, Typography, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
+
 import  FavoriteIcon  from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 import { useState } from 'react';
 // utils
+import { useDispatch, useSelector } from 'react-redux';
+import { addFevMovie,removeFevMovie } from '../../../features/counter/counterSlice';
 import { fCurrency } from '../../../utils/formatNumber';
 // components
 import Label from '../../../components/label';
@@ -30,10 +33,15 @@ ShopProductCard.propTypes = {
   product: PropTypes.object,
 };
 
-export default function ShopProductCard({ product }) {
+export default function ShopProductCard({ product,index }) {
 const [fev, setFev] = useState(false);
 // const [addFev, setAddFev] = useState([]);
 const arr = [];
+
+const count = useSelector((state) => state.counter.value)
+const countFevRe = useSelector((state) => state.counter.fevRe)
+
+const dispatch = useDispatch()
 
 if (localStorage.getItem('codeFev') === null) {
   localStorage.setItem('codeFev', JSON.stringify(arr));
@@ -59,6 +67,16 @@ const handleClickFev =(id,isCheck)=> {
 
   return (
     <Card sx={{ height: 430 }}>
+      <div>
+        {/* <button
+          aria-label="Increment value"
+          onClick={() => dispatch(addFevMovie(1))}
+        >
+          Increment
+        </button>
+        <span>{count}</span> */}
+        
+      </div>
       <Box sx={{ pt: '100%', position: 'relative' }}>
         <StyledProductImg alt={product.title_en} src={product.poster_url} />
       </Box>
@@ -88,7 +106,7 @@ const handleClickFev =(id,isCheck)=> {
         </Stack>
 
         <Stack alignItems="center">
-          {fev ? <FavoriteIcon onClick={()=>handleClickFev(product.id,true)} /> : <FavoriteBorderIcon onClick={()=>handleClickFev(product.id,false)} />}
+          {product.check ? <FavoriteIcon onClick={()=>dispatch(removeFevMovie(index))} /> : <FavoriteBorderIcon onClick={()=>dispatch(addFevMovie(index))} />}
         </Stack>
       </Stack>
     </Card>

@@ -1,8 +1,13 @@
 import { Helmet } from 'react-helmet-async';
 import { useEffect, useState } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+
 // @mui
 import { Container, Stack, Typography } from '@mui/material';
 import axios from 'axios';
+
+import { dataMovieAll } from '../features/counter/counterSlice';
 // components
 import { ProductSort, ProductList, ProductCartWidget, ProductFilterSidebar } from '../sections/@dashboard/products';
 // mock
@@ -16,6 +21,10 @@ export default function ProductsPage() {
   const [openFilter, setOpenFilter] = useState(false);
   const [dataMovie, setMovie] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const valMovieAll = useSelector((state) => state.counter.moviesAll)
+  
+
+const dispatch = useDispatch()
 
   const handleOpenFilter = () => {
     setOpenFilter(true);
@@ -28,13 +37,25 @@ export default function ProductsPage() {
 
   useEffect(() => {
     // declare the data fetching function
-    
+    const myArray =[];
     const fetchData = async () => {
       const {data} = await axios.get('https://www.majorcineplex.com/apis/get_movie_avaiable');
       setMovie(data.movies);
       setIsLoading(true);
       // console.log({dataMovie});
       localStorage.setItem('dataMovies',JSON.stringify(data.movies));
+
+      // data.movies.map((DataMovies) => ( 
+      //   // console.log(DataMovies);
+      //   DataMovies.check = false
+      // ));
+      let i = 0 ;
+      while (i < data.movies.length){
+        data.movies[i].check = false
+        i+=1;;
+    }
+
+      dispatch(dataMovieAll(data.movies));
       // const savedMovie = localStorage.getItem(dataMovies);
     }
   
@@ -66,7 +87,7 @@ export default function ProductsPage() {
           </Stack>
         </Stack>
 
-        {isLoading && <ProductList products={dataMovie} />}
+        {isLoading && <ProductList products={valMovieAll} />}
         <ProductCartWidget />
       </Container>
     </>
