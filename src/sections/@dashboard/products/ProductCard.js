@@ -11,10 +11,10 @@ import { useState } from 'react';
 // utils
 import { useDispatch, useSelector } from 'react-redux';
 import { addFevMovie,removeFevMovie } from '../../../features/counter/counterSlice';
-import { fCurrency } from '../../../utils/formatNumber';
+// import { fCurrency } from '../../../utils/formatNumber';
 // components
-import Label from '../../../components/label';
-import { ColorPreview } from '../../../components/color-utils';
+// import Label from '../../../components/label';
+// import { ColorPreview } from '../../../components/color-utils';
 
 
 // ----------------------------------------------------------------------
@@ -38,32 +38,32 @@ const [fev, setFev] = useState(false);
 // const [addFev, setAddFev] = useState([]);
 const arr = [];
 
-const count = useSelector((state) => state.counter.value)
-const countFevRe = useSelector((state) => state.counter.fevRe)
+// const count = useSelector((state) => state.counter.value)
+// const countFevRe = useSelector((state) => state.counter.fevRe)
 
 const dispatch = useDispatch()
 
-if (localStorage.getItem('codeFev') === null) {
-  localStorage.setItem('codeFev', JSON.stringify(arr));
-}
+// if (localStorage.getItem('codeFev') === null) {
+//   localStorage.setItem('codeFev', JSON.stringify(arr));
+// }
 
-const handleClickFev =(id,isCheck)=> {
-  let arrAddFev = [];
-  setFev(!fev);
-  arrAddFev = JSON.parse(localStorage.getItem('codeFev')).length !== 0
-        ? (JSON.parse(localStorage.getItem('codeFev')))
-        : [];
+// const handleClickFev =(id,isCheck)=> {
+//   let arrAddFev = [];
+//   setFev(!fev);
+//   arrAddFev = JSON.parse(localStorage.getItem('codeFev')).length !== 0
+//         ? (JSON.parse(localStorage.getItem('codeFev')))
+//         : [];
 
-  if(isCheck===true){
-    arrAddFev.pop(id)
-  } else {
-    arrAddFev.push(id)
-  }
-  // arrAddFev.push(id)
-  localStorage.setItem("codeFev", JSON.stringify(arrAddFev));
-  // console.log(e.target.id);
+//   if(isCheck===true){
+//     arrAddFev.pop(id)
+//   } else {
+//     arrAddFev.push(id)
+//   }
+//   // arrAddFev.push(id)
+//   localStorage.setItem("codeFev", JSON.stringify(arrAddFev));
+//   // console.log(e.target.id);
   
-}
+// }
 
   return (
     <Card sx={{ height: 430 }}>
