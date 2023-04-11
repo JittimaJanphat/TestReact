@@ -42,7 +42,6 @@ const arr = [];
 // const countFevRe = useSelector((state) => state.counter.fevRe)
 
 const dispatch = useDispatch()
-
 // if (localStorage.getItem('codeFev') === null) {
 //   localStorage.setItem('codeFev', JSON.stringify(arr));
 // }
