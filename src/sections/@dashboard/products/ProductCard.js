@@ -6,7 +6,7 @@ import { styled } from '@mui/material/styles';
 import  FavoriteIcon  from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
-import { useState } from 'react';
+import { useState ,useEffect} from 'react';
 // utils
 import { fCurrency } from '../../../utils/formatNumber';
 // components
@@ -32,12 +32,17 @@ ShopProductCard.propTypes = {
 
 export default function ShopProductCard({ product }) {
 const [fev, setFev] = useState(false);
-// const [addFev, setAddFev] = useState([]);
+const [addFev, setAddFev] = useState([]);
 const arr = [];
 
 if (localStorage.getItem('codeFev') === null) {
   localStorage.setItem('codeFev', JSON.stringify(arr));
 }
+
+useEffect(() => {
+  setAddFev(JSON.parse(localStorage.getItem('codeFev')));
+
+}, [])
 
 const handleClickFev =(id,isCheck)=> {
   let arrAddFev = [];
@@ -47,14 +52,16 @@ const handleClickFev =(id,isCheck)=> {
         : [];
 
   if(isCheck===true){
-    arrAddFev.pop(id)
+    const index = arrAddFev.indexOf(id);
+    arrAddFev.splice(index,1)
   } else {
     arrAddFev.push(id)
   }
   // arrAddFev.push(id)
   localStorage.setItem("codeFev", JSON.stringify(arrAddFev));
-  // console.log(e.target.id);
-  
+  setAddFev(JSON.parse(localStorage.getItem('codeFev')));
+
+  // console.log(JSON.parse(localStorage.getItem('codeFev')));
 }
 
   return (
@@ -78,6 +85,7 @@ const handleClickFev =(id,isCheck)=> {
               variant="body1"
               sx={{
                 color: 'text.disabled',
+                fontSize:12
               }}
             >
               {product.title_th && product.title_th}
@@ -88,7 +96,7 @@ const handleClickFev =(id,isCheck)=> {
         </Stack>
 
         <Stack alignItems="center">
-          {fev ? <FavoriteIcon onClick={()=>handleClickFev(product.id,true)} /> : <FavoriteBorderIcon onClick={()=>handleClickFev(product.id,false)} />}
+          {addFev.find(element => element === product.id) ? <FavoriteIcon onClick={()=>handleClickFev(product.id,true)} />: <FavoriteBorderIcon onClick={()=>handleClickFev(product.id,false)} /> }
         </Stack>
       </Stack>
     </Card>
