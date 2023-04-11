@@ -35,34 +35,10 @@ ShopProductCard.propTypes = {
 
 export default function ShopProductCard({ product,index }) {
 const [fev, setFev] = useState(false);
-// const [addFev, setAddFev] = useState([]);
 const arr = [];
 
-// const count = useSelector((state) => state.counter.value)
-// const countFevRe = useSelector((state) => state.counter.fevRe)
 
 const dispatch = useDispatch()
-// if (localStorage.getItem('codeFev') === null) {
-//   localStorage.setItem('codeFev', JSON.stringify(arr));
-// }
-
-// const handleClickFev =(id,isCheck)=> {
-//   let arrAddFev = [];
-//   setFev(!fev);
-//   arrAddFev = JSON.parse(localStorage.getItem('codeFev')).length !== 0
-//         ? (JSON.parse(localStorage.getItem('codeFev')))
-//         : [];
-
-//   if(isCheck===true){
-//     arrAddFev.pop(id)
-//   } else {
-//     arrAddFev.push(id)
-//   }
-//   // arrAddFev.push(id)
-//   localStorage.setItem("codeFev", JSON.stringify(arrAddFev));
-//   // console.log(e.target.id);
-  
-// }
 
   return (
     <Card sx={{ height: 430 }}>
