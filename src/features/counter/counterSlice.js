@@ -23,13 +23,15 @@ export const counterSlice = createSlice({
     //   state.value += action.payload
     // },
     dataMovieAll: (state,action) => {
-        // console.log(action.payload)
+         console.log(action.payload)
         state.moviesAll = action.payload
       },
     addFevMovie: (state,action) => {
-        // console.log(action.payload)
+        console.log(action.payload)
         state.fevRe = !state.fevRe
         state.moviesAll[action.payload].check = true
+        state.moviesAll.pop(action.payload)
+        console.log(state.moviesAll)
       },
       removeFevMovie: (state,action) => {
         // console.log(action.payload)

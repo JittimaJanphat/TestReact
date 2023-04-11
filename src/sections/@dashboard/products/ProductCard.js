@@ -35,23 +35,16 @@ ShopProductCard.propTypes = {
 
 export default function ShopProductCard({ product,index }) {
 const [fev, setFev] = useState(false);
+// const [addFev, setAddFev] = useState([]);
 const arr = [];
 
+// const count = useSelector((state) => state.counter.value)
+// const countFevRe = useSelector((state) => state.counter.fevRe)
 
 const dispatch = useDispatch()
 
   return (
     <Card sx={{ height: 430 }}>
-      <div>
-        {/* <button
-          aria-label="Increment value"
-          onClick={() => dispatch(addFevMovie(1))}
-        >
-          Increment
-        </button>
-        <span>{count}</span> */}
-        
-      </div>
       <Box sx={{ pt: '100%', position: 'relative' }}>
         <StyledProductImg alt={product.title_en} src={product.poster_url} />
       </Box>
@@ -71,6 +64,7 @@ const dispatch = useDispatch()
               variant="body1"
               sx={{
                 color: 'text.disabled',
+                fontSize: 12
               }}
             >
               {product.title_th && product.title_th}
